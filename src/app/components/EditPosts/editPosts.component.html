@@ -1,0 +1,33 @@
+<section class="list-group" *ngIf="hasPosts()">
+  <article
+    class="list-group-item post"
+    [ngClass]="{active: selectedPost && post == selectedPost}"
+    myDropTarget (myDrop)="onDrop($event, post)"
+    *ngFor="let post of posts.items">
+
+    <button class="post__select-button" (click)="selectPost(post)">Select post</button>
+
+    <span class="photos">
+      <span class="photo" *ngFor="let photo of post.photos" [myDraggable]="{data: photo}">
+        <img [src]="getThumbnailUrl(photo)">
+        <section class="photo__actions">
+          <button *ngIf="selectedPost && selectedPost != post"
+                  (click)="moveToSelectedPost(photo)" class="fa fa-long-arrow-right"
+                  title="Move to selected post"></button>
+          <button (click)="moveOutPhoto(photo)" class="fa fa-long-arrow-up"
+                  title="Move out photo"></button>
+        </section>
+      </span>
+    </span>
+
+    <div class="post__title">
+      <input [(ngModel)]="post.title">
+      <button type="button" (click)="updateTitle(post._id, post.title)">Save</button>
+    </div>
+
+    <div class="post__date">
+      {{formatDate(post.date)}}
+    </div>
+
+  </article>
+</section>

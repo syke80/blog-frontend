@@ -1,0 +1,15 @@
+<section class="list-group" *ngIf="hasPosts()">
+  <article src="" class="list-group-item" class="post" *ngFor="let post of posts.items">
+    <section class="photos">
+      <a *ngFor="let photo of post.photos; let i = index" href="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}" class="photo">
+        <img *ngIf="i == 0" src="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}&resolution=400x400">
+        <img *ngIf="i != 0" src="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}&resolution=100x100">
+      </a>
+    </section>
+
+    <p *ngIf="post.title" class="post__description">{{post.title}}</p>
+    <p class="post__timestamp">{{post.timestamp | stringToDate | date:'medium'}}</p>
+  </article>
+</section>
+<button (click)="loadNextPage()">Load more</button>>
+<div id="infinitescroll"></div>

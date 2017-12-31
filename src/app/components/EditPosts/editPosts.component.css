@@ -1,0 +1,31 @@
+.post {
+  position: relative;
+  border: 1px solid #555555;
+  width: 50%;
+}
+
+.post:hover .post__select-button {
+  display: block;
+}
+
+.post__select-button {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.active {
+  background: #dddddd;
+}
+
+.photo {
+  position: relative;
+}
+
+.photo__actions {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
