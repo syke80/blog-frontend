@@ -1,3 +1,9 @@
+/**
+  Source: 
+    https://www.radzen.com/blog/angular-drag-and-drop/
+    https://plnkr.co/edit/NLKQV4b2obhd9BUvP7Oi?p=preview
+*/
+
 import { Injectable } from '@angular/core';
 
 @Injectable()

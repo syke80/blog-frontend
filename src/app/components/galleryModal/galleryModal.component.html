@@ -1,0 +1,6 @@
+<section *ngIf="isOpen" class="gallery-modal" (click)="onClickOverlay()">
+  <button class="gallery-modal__previous" (click)="onClickPrevious($event)">Previous</button>
+  <img [src]=getImageUrl() class="gallery-modal__image">
+  <button class="gallery-modal__next" (click)="onClickNext($event)">Next</button>
+  <button class="gallery-modal__close" (click)="onClickClose($event)">Close</button>
+</section>

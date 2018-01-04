@@ -1,0 +1,22 @@
+.gallery-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.gallery-modal__image {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.gallery-modal__close {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}

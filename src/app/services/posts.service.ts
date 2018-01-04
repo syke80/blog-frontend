@@ -10,6 +10,7 @@ import {PostModel} from '../Models/Post.model';
 import {PostsModel} from '../Models/Posts.model';
 import {Pagination} from '../Models/Pagination.model';
 import {PhotoModel} from '../Models/Photo.model';
+import {Tag} from '../Models/Tag.model';
 
 @Injectable()
 
@@ -48,12 +49,27 @@ export class PostsService {
     return photos;
   }
 
+  private convertTags(responseTags: any): Array<Tag> {
+    let tags: Array<Tag> = [];
+
+    try {
+      responseTags.forEach((responseTag: any) => {
+        tags.push(new Tag(responseTag.name));
+      });
+    } catch (e) {
+      throw this.InvalidResponseException;
+    }
+
+    return tags;
+  }
+
   private convertPostItems(responseItems: any): Array<PostModel> {
     let items: Array<PostModel> = [];
 
     responseItems.forEach( (responseItem: PostModel) => {
       let photos = this.convertPhotos(responseItem.photos);
-      items.push(new PostModel(responseItem._id, responseItem.timestamp, responseItem.title, photos));
+      let tags = this.convertTags(responseItem.tags);
+      items.push(new PostModel(responseItem._id, responseItem.timestamp, responseItem.title, photos, tags));
     });
 
     return items;
@@ -99,14 +115,31 @@ export class PostsService {
     return this.http.get(this.getServiceEndpoint(), options)
       .map((response: Response) => {
         return response.json();
-        /*
+/*
         let postsResponse: PostsResponseModel = response.json();
         let postItems: Array<PostModel> = this.convertPostItems(postsResponse.data);
         let navigation: NavigationModel = this.convertNavigation(postsResponse.navigation);
 
         return new PostsModel(postItems, navigation);
- */
+        */
       })
+      .catch(this.handleError);
+  }
+  
+  saveTag(postId, tag) {
+    let options = new RequestOptions({
+      headers: this.getHeaders()
+    });
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('tag', tag);
+    
+    return this.http.put(
+        this.getServiceEndpoint() + postId + '/tag',
+        urlSearchParams,
+        options
+      )
+      .map(response => response.json())
       .catch(this.handleError);
   }
 

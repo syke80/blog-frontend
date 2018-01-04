@@ -1,15 +1,31 @@
+<es-gallery-modal></es-gallery-modal>
 <section class="list-group" *ngIf="hasPosts()">
-  <article src="" class="list-group-item" class="post" *ngFor="let post of posts.items">
-    <section class="photos">
-      <a *ngFor="let photo of post.photos; let i = index" href="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}" class="photo">
-        <img *ngIf="i == 0" src="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}&resolution=400x400">
-        <img *ngIf="i != 0" src="http://localhost/eniko-syke/backend/photos/?filename={{photo.filename}}&resolution=100x100">
-      </a>
-    </section>
+  <article
+    class="list-group-item post"
+    [ngClass]="{active: selectedPost && post == selectedPost}"
+    *ngFor="let post of posts.items">
 
-    <p *ngIf="post.title" class="post__description">{{post.title}}</p>
-    <p class="post__timestamp">{{post.timestamp | stringToDate | date:'medium'}}</p>
+    <div class="post__date">
+      {{formatDate(post.date)}}
+    </div>
+
+    <div *ngIf="post.title" class="post__title">
+      {{post.title}}
+    </div>
+
+    <div class="post__tags">
+      {{post.tags}}
+    </div>
+
+    <span class="photos">
+      <a class="photo" [href]="getFullsizeUrl(photo)" *ngFor="let photo of post.photos; let i = index" esGallery esGalleryId="mygallery-{{post._id}}" [esGalleryImage]=getFullsizeUrl(photo)>
+        <img *ngIf="i==0" [src]="getMainImageUrl(photo)">
+        <img *ngIf="i!=0" [src]="getThumbnailUrl(photo)">
+      </a>
+    </span>
+
   </article>
 </section>
-<button (click)="loadNextPage()">Load more</button>>
+
+<button (click)="loadNextPage()">Load more</button>
 <div id="infinitescroll"></div>

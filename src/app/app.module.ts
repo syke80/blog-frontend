@@ -8,17 +8,21 @@ import { routing } from './app.routing';
 import {AppComponent} from './app.component';
 import {EditPostsComponent} from './components/EditPosts/editPosts.component';
 import {EditPostsPageComponent} from './components/EditPostsPage/editPostsPage.component';
+import {AddTagComponent} from './components/addTag/addTag.component';
+import {GalleryModalComponent} from './components/galleryModal/galleryModal.component';
 import {ViewPostsComponent} from './components/ViewPosts/viewPosts.component';
 import {ViewPostsPageComponent} from './components/ViewPostsPage/viewPostsPage.component';
 import {PostsService} from './services/posts.service';
 import {MovePhotoService} from './services/movePhoto.service';
 import {MoveOutPhotoService} from './services/moveOutPhoto.service';
 import {ConfigService} from './services/config.service';
+import {GalleryService} from './services/gallery.service';
 
 import {StringToDatePipe} from './pipes/stringToDate.pipe';
 
 import { DraggableDirective } from './directives/draggable.directive';
 import { DropTargetDirective } from './directives/dropTarget.directive';
+import { GalleryDirective } from './directives/gallery.directive';
 import { DragService } from './services/drag.service';
 
 
@@ -32,12 +36,15 @@ import { DragService } from './services/drag.service';
   ],
   declarations: [
     AppComponent,
+    GalleryModalComponent,
     EditPostsPageComponent,
     EditPostsComponent,
     ViewPostsPageComponent,
     ViewPostsComponent,
+    AddTagComponent,
     DraggableDirective,
     DropTargetDirective,
+    GalleryDirective,
     StringToDatePipe
   ],
   providers: [
@@ -45,7 +52,8 @@ import { DragService } from './services/drag.service';
     MoveOutPhotoService,
     PostsService,
     ConfigService,
-    DragService
+    DragService,
+    GalleryService
   ],
   bootstrap: [AppComponent]
 })

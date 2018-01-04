@@ -86,5 +86,16 @@ export class EditPostsComponent implements OnInit {
         this.getPosts();
       })
   }
-  
+
+  loadNextPage() {
+    this.navigation.page += 1;
+    this.postsService.getPosts(this.navigation)
+    .subscribe((posts: PostsModel) => {
+      posts.items.forEach((item: PostModel) => {
+        this.posts.items.push(item);
+        // TODO: this.posts is not a PostsModel, just a simple data object got from the server
+//        this.posts.add(item);
+      });
+    });
+  }
 }
