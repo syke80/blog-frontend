@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Injectable()
 
@@ -8,7 +9,8 @@ export class ApiConfigModel {
 
 export class ConfigService {
     private config: ApiConfigModel = {
-        apiUrl: 'http://localhost:3000'
+//        apiUrl: 'http://localhost:3000'
+        apiUrl: environment.apiUrl
     };
 
     public setOption(option: string, value: string): void {
