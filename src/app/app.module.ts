@@ -18,8 +18,6 @@ import {MoveOutPhotoService} from './services/moveOutPhoto.service';
 import {ConfigService} from './services/config.service';
 import {GalleryService} from './services/gallery.service';
 
-import {StringToDatePipe} from './pipes/stringToDate.pipe';
-
 import { DraggableDirective } from './directives/draggable.directive';
 import { DropTargetDirective } from './directives/dropTarget.directive';
 import { GalleryDirective } from './directives/gallery.directive';
@@ -44,8 +42,7 @@ import { DragService } from './services/drag.service';
     AddTagComponent,
     DraggableDirective,
     DropTargetDirective,
-    GalleryDirective,
-    StringToDatePipe
+    GalleryDirective
   ],
   providers: [
     MovePhotoService,
