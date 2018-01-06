@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'viewPoststPage.component.html'
+    styleUrls: ['viewPostsPage.component.css'],
+    templateUrl: 'viewPostsPage.component.html'
 })
 
 export class ViewPostsPageComponent {

@@ -1,7 +1,7 @@
 <es-gallery-modal></es-gallery-modal>
-<section class="list-group" *ngIf="hasPosts()">
+<section class="posts" *ngIf="hasPosts()">
   <article
-    class="list-group-item post"
+    class="post"
     [ngClass]="{active: selectedPost && post == selectedPost}"
     *ngFor="let post of posts.items">
 
@@ -17,12 +17,12 @@
       {{post.tags}}
     </div>
 
-    <span class="photos">
-      <a class="photo" [href]="getFullsizeUrl(photo)" *ngFor="let photo of post.photos; let i = index" esGallery esGalleryId="mygallery-{{post._id}}" [esGalleryImage]=getFullsizeUrl(photo)>
-        <img *ngIf="i==0" [src]="getMainImageUrl(photo)">
-        <img *ngIf="i!=0" [src]="getThumbnailUrl(photo)">
+    <div class="post__photos">
+      <a class="post__photo" [ngClass]="{'post__photo--main': i==0, 'post__photo--thumbnail': i!=0}" [href]="getFullsizeUrl(photo)" *ngFor="let photo of post.photos; let i = index" esGallery esGalleryId="mygallery-{{post._id}}" [esGalleryImage]=getFullsizeUrl(photo)>
+        <img class="post__photo__image" *ngIf="i==0" [src]="getMainImageUrl(photo)">
+        <img class="post__photo__image" *ngIf="i!=0" [src]="getThumbnailUrl(photo)">
       </a>
-    </span>
+    </div>
 
   </article>
 </section>
