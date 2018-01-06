@@ -12,6 +12,7 @@ import {AddTagComponent} from './components/addTag/addTag.component';
 import {GalleryModalComponent} from './components/galleryModal/galleryModal.component';
 import {ViewPostsComponent} from './components/viewPosts/viewPosts.component';
 import {ViewPostsPageComponent} from './components/viewPostsPage/viewPostsPage.component';
+import {NavigationComponent} from './components/navigation/navigation.component';
 import {PostsService} from './services/posts.service';
 import {MovePhotoService} from './services/movePhoto.service';
 import {MoveOutPhotoService} from './services/moveOutPhoto.service';
@@ -42,7 +43,8 @@ import { DragService } from './services/drag.service';
     AddTagComponent,
     DraggableDirective,
     DropTargetDirective,
-    GalleryDirective
+    GalleryDirective,
+    NavigationComponent
   ],
   providers: [
     MovePhotoService,
