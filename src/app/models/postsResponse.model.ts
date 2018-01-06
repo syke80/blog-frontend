@@ -1,4 +1,4 @@
-export class PostsResponseModel {
+export class PostsResponse {
   data: any;
   navigation: any;
 

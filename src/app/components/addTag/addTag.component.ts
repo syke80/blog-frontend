@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PostModel} from '../../Models/Post.model';
+import {Post} from '../../models/post.model';
 import {PostsService} from '../../services/posts.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {PostsService} from '../../services/posts.service';
 
 export class AddTagComponent {
   @Input()
-  post: PostModel;
+  post: Post;
   tag: string;
 
   constructor(

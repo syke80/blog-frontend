@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Pagination} from '../../Models/Pagination.model';
+import {Pagination} from '../../models/pagination.model';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +7,7 @@ import {Pagination} from '../../Models/Pagination.model';
   templateUrl: 'navigation.component.html'
 })
 
-export class ViewPostsComponent {
+export class NavigationComponent {
   @Input()
   url: string = '';
   @Input()

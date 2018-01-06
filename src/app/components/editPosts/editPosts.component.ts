@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PostModel} from '../../Models/Post.model';
-import {Pagination} from '../../Models/Pagination.model';
-import {PostsModel} from '../../Models/Posts.model';
-import {PhotoModel} from '../../Models/Photo.model';
+import {Component, OnInit} from '@angular/core';
+import {Post} from '../../models/post.model';
+import {Pagination} from '../../models/pagination.model';
+import {Posts} from '../../models/posts.model';
+import {Photo} from '../../models/photo.model';
 import {PostsService} from '../../services/posts.service';
 import {MovePhotoService} from '../../services/movePhoto.service';
 import {MoveOutPhotoService} from '../../services/moveOutPhoto.service';
@@ -18,8 +18,8 @@ import * as moment from 'moment';
 
 export class EditPostsComponent implements OnInit {
   navigation: Pagination = new Pagination(1, 10, 0);
-  posts: PostsModel;
-  selectedPost: PostModel;
+  posts: Posts;
+  selectedPost: Post;
   photosUrl: string;
 
   constructor(
@@ -35,7 +35,7 @@ export class EditPostsComponent implements OnInit {
     this.getPosts();
   }
 
-  getThumbnailUrl(photo: PhotoModel) {
+  getThumbnailUrl(photo: Photo) {
     return this.photosUrl + "/100x100/" + photo.filename;
   }
 
@@ -46,7 +46,7 @@ export class EditPostsComponent implements OnInit {
       });
   }
 
-  selectPost(post: PostModel): void {
+  selectPost(post: Post): void {
     this.selectedPost = post;
   }
 
@@ -66,7 +66,7 @@ export class EditPostsComponent implements OnInit {
 
   getPosts(): void {
     this.postsService.getPosts(this.navigation)
-      .subscribe((posts: PostsModel) => {
+      .subscribe((posts: Posts) => {
         this.posts = posts;
       })
   }
@@ -78,7 +78,7 @@ export class EditPostsComponent implements OnInit {
   hasPosts() {
     return !!this.posts;
   }
-  
+
   onDrop(data: any, post: any) {
     console.log('dropped', data, post);
     this.movePhotoService.movePhotoToPost(data, post)
@@ -90,10 +90,10 @@ export class EditPostsComponent implements OnInit {
   loadNextPage() {
     this.navigation.page += 1;
     this.postsService.getPosts(this.navigation)
-    .subscribe((posts: PostsModel) => {
-      posts.items.forEach((item: PostModel) => {
+    .subscribe((posts: Posts) => {
+      posts.items.forEach((item: Post) => {
         this.posts.items.push(item);
-        // TODO: this.posts is not a PostsModel, just a simple data object got from the server
+        // TODO: this.posts is not a Posts, just a simple data object got from the server
 //        this.posts.add(item);
       });
     });

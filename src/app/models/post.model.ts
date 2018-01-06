@@ -1,11 +1,11 @@
-import {PhotoModel} from './Photo.model';
-import {Tag} from './Tag.model';
+import {Photo} from './photo.model';
+import {Tag} from './tag.model';
 
-export class PostModel {
+export class Post {
   _id: number;
   timestamp: Date;
   title: string;
-  photos: Array<PhotoModel> = [];
+  photos: Array<Photo> = [];
   tags: Array<Tag> = [];
 
   constructor(_id, timestamp, title, photos, tags) {

@@ -1,8 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditPostsPageComponent } from './components/EditPostsPage/editPostsPage.component';
-import { ViewPostsPageComponent } from './components/ViewPostsPage/viewPostsPage.component';
+import { EditPostsPageComponent } from './components/editPostsPage/editPostsPage.component';
+import { ViewPostsPageComponent } from './components/viewPostsPage/viewPostsPage.component';
 
 const appRoutes: Routes = [
     {

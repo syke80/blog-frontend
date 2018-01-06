@@ -1,4 +1,4 @@
-export class PhotoModel {
+export class Photo {
   filename: string;
   timestamp: Date;
 

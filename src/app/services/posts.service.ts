@@ -5,12 +5,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {ConfigService} from './config.service';
-import {PostsResponseModel} from '../Models/PostsResponse.model';
-import {PostModel} from '../Models/Post.model';
-import {PostsModel} from '../Models/Posts.model';
-import {Pagination} from '../Models/Pagination.model';
-import {PhotoModel} from '../Models/Photo.model';
-import {Tag} from '../Models/Tag.model';
+import {PostsResponse} from '../models/postsResponse.model';
+import {Post} from '../models/post.model';
+import {Posts} from '../models/posts.model';
+import {Pagination} from '../models/pagination.model';
+import {Photo} from '../models/photo.model';
+import {Tag} from '../models/tag.model';
 
 @Injectable()
 
@@ -35,12 +35,12 @@ export class PostsService {
     return pagination;
   }
 
-  private convertPhotos(responsePhotos: any): Array<PhotoModel> {
-    let photos: Array<PhotoModel> = [];
+  private convertPhotos(responsePhotos: any): Array<Photo> {
+    let photos: Array<Photo> = [];
 
     try {
       responsePhotos.forEach((photo: any) => {
-        photos.push(new PhotoModel(photo.filename, new Date(photo.timestamp)));
+        photos.push(new Photo(photo.filename, new Date(photo.timestamp)));
       });
     } catch (e) {
       throw this.InvalidResponseException;
@@ -63,13 +63,13 @@ export class PostsService {
     return tags;
   }
 
-  private convertPostItems(responseItems: any): Array<PostModel> {
-    let items: Array<PostModel> = [];
+  private convertPostItems(responseItems: any): Array<Post> {
+    let items: Array<Post> = [];
 
-    responseItems.forEach( (responseItem: PostModel) => {
+    responseItems.forEach( (responseItem: Post) => {
       let photos = this.convertPhotos(responseItem.photos);
       let tags = this.convertTags(responseItem.tags);
-      items.push(new PostModel(responseItem._id, responseItem.timestamp, responseItem.title, photos, tags));
+      items.push(new Post(responseItem._id, responseItem.timestamp, responseItem.title, photos, tags));
     });
 
     return items;
@@ -89,7 +89,7 @@ export class PostsService {
 
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('title', title);
-    
+
     return this.http.put(
         this.getServiceEndpoint() + id,
         urlSearchParams,
@@ -99,7 +99,7 @@ export class PostsService {
       .catch(this.handleError);
   }
 
-  getPosts(navigation: Pagination): Observable<PostsModel> {
+  getPosts(navigation: Pagination): Observable<Posts> {
     let parameters: URLSearchParams,
       options: RequestOptions;
 
@@ -116,16 +116,16 @@ export class PostsService {
       .map((response: Response) => {
         return response.json();
 /*
-        let postsResponse: PostsResponseModel = response.json();
-        let postItems: Array<PostModel> = this.convertPostItems(postsResponse.data);
+        let postsResponse: PostsResponse = response.json();
+        let postItems: Array<Post> = this.convertPostItems(postsResponse.data);
         let navigation: NavigationModel = this.convertNavigation(postsResponse.navigation);
 
-        return new PostsModel(postItems, navigation);
+        return new Posts(postItems, navigation);
         */
       })
       .catch(this.handleError);
   }
-  
+
   saveTag(postId, tag) {
     let options = new RequestOptions({
       headers: this.getHeaders()
@@ -133,7 +133,7 @@ export class PostsService {
 
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('tag', tag);
-    
+
     return this.http.put(
         this.getServiceEndpoint() + postId + '/tag',
         urlSearchParams,

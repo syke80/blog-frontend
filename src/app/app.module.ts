@@ -6,12 +6,12 @@ import { RouterModule } from '@angular/router';
 import { routing } from './app.routing';
 
 import {AppComponent} from './app.component';
-import {EditPostsComponent} from './components/EditPosts/editPosts.component';
-import {EditPostsPageComponent} from './components/EditPostsPage/editPostsPage.component';
+import {EditPostsComponent} from './components/editPosts/editPosts.component';
+import {EditPostsPageComponent} from './components/editPostsPage/editPostsPage.component';
 import {AddTagComponent} from './components/addTag/addTag.component';
 import {GalleryModalComponent} from './components/galleryModal/galleryModal.component';
-import {ViewPostsComponent} from './components/ViewPosts/viewPosts.component';
-import {ViewPostsPageComponent} from './components/ViewPostsPage/viewPostsPage.component';
+import {ViewPostsComponent} from './components/viewPosts/viewPosts.component';
+import {ViewPostsPageComponent} from './components/viewPostsPage/viewPostsPage.component';
 import {PostsService} from './services/posts.service';
 import {MovePhotoService} from './services/movePhoto.service';
 import {MoveOutPhotoService} from './services/moveOutPhoto.service';

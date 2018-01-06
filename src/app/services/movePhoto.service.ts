@@ -1,12 +1,12 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {Injectable } from '@angular/core';
 import {Headers, Http, Response, URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {ConfigService} from './config.service';
-import {PhotoModel} from '../Models/photo.model';
-import {PostModel} from '../Models/post.model';
+import {Photo} from '../models/photo.model';
+import {Post} from '../models/post.model';
 
 @Injectable()
 
@@ -31,7 +31,7 @@ export class MovePhotoService {
     });
   }
 
-  movePhotoToPost(photo: PhotoModel, post: PostModel): Observable<any> {
+  movePhotoToPost(photo: Photo, post: Post): Observable<any> {
     let url = this.getServiceEndpoint();
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('photo', photo.filename);
