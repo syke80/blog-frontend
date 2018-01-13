@@ -2,3 +2,15 @@
   display: flex;
   justify-content: center;
 }
+
+.header {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.5em 0 1em 0;
+}
+
+:host-context {
+  display: block;
+  background: #f0f0ee;
+}

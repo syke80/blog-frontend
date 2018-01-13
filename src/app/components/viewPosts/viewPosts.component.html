@@ -3,22 +3,34 @@
   <article
     class="post"
     [ngClass]="{active: selectedPost && post == selectedPost}"
+    in-viewport
+    (inViewport)="onUpdateVisibility(post, $event.value)"
     *ngFor="let post of posts.items">
 
-    <div class="post__date">
-      {{formatDate(post.date)}}
-    </div>
+    <div class="post__text-container">
+      <div class="post__date">
+        {{formatDate(post.date)}}
+      </div>
 
-    <div *ngIf="post.title" class="post__title">
-      {{post.title}}
-    </div>
+      <div *ngIf="post.title" class="post__title">
+        {{post.title}}
+      </div>
 
-    <div class="post__tags">
-      {{post.tags}}
+      <div class="post__tags">
+        {{post.tags}}
+      </div>
     </div>
 
     <div class="post__photos">
-      <a class="post__photo" [ngClass]="{'post__photo--main': i==0, 'post__photo--thumbnail': i!=0}" [href]="getFullsizeUrl(photo)" *ngFor="let photo of post.photos; let i = index" esGallery esGalleryId="mygallery-{{post._id}}" [esGalleryImage]=getFullsizeUrl(photo)>
+      <a
+        class="post__photo"
+        [ngClass]="{'post__photo--main': i==0, 'post__photo--thumbnail': i!=0}"
+        [href]="getFullsizeUrl(photo)"
+        *ngFor="let photo of post.photos; let i = index"
+        esGallery
+        esGalleryId="mygallery-{{post._id}}"
+        [esGalleryImage]=getFullsizeUrl(photo)>
+
         <img class="post__photo__image" *ngIf="i==0" [src]="getMainImageUrl(photo)">
         <img class="post__photo__image" *ngIf="i!=0" [src]="getThumbnailUrl(photo)">
       </a>
@@ -28,4 +40,3 @@
 </section>
 
 <button (click)="loadNextPage()">Load more</button>
-<div id="infinitescroll"></div>

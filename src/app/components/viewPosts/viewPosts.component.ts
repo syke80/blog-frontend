@@ -7,8 +7,8 @@ import {Pagination} from '../../models/pagination.model';
 import {ConfigService} from '../../services/config.service';
 import * as moment from 'moment';
 
-const thumbnailSizePath = '100x100/';
-const mainImageSizePath = '300x300/';
+const thumbnailSizePath = '200x200/';
+const mainImageSizePath = '600x600/';
 const fullSizePath = '';
 
 @Component({
@@ -24,6 +24,8 @@ export class ViewPostsComponent implements OnInit {
   posts: Posts;
   selectedPost: Post;
   photosUrl: string;
+  isLoadingNextPage = false;
+  isLastPageLoaded = false;
 
   constructor(
     private postsService: PostsService,
@@ -54,19 +56,13 @@ export class ViewPostsComponent implements OnInit {
       });
   }
 
-  checkInfiniteScrollingTriggerElement() {
-    let triggerElement = document.getElementById('infinitescroll'),
-      bottomLineY = document.body.scrollTop + document.body.clientHeight;
+  onUpdateVisibility(post, isVisible) {
+    let lastPost = this.posts.items[this.posts.items.length - 1];
 
-    if (bottomLineY >= triggerElement.offsetTop) {
-      console.log("trigger is visible");
+    if (isVisible && post === lastPost) {
+      console.log("visible last", post.date);
+      this.loadNextPage();
     }
-  }
-
-  initializeInfiniteScrolling() {
-    window.onscroll = () => {
-      this.checkInfiniteScrollingTriggerElement();
-    };
   }
 
   hasPosts() {
@@ -78,14 +74,23 @@ export class ViewPostsComponent implements OnInit {
   }
 
   loadNextPage() {
+    if (this.isLoadingNextPage || this.isLastPageLoaded) {
+      return;
+    }
+
+    this.isLoadingNextPage = true;
     this.navigation.page += 1;
     this.postsService.getPosts(this.navigation)
     .subscribe((posts: Posts) => {
+      if (posts.items === []) {
+        this.isLastPageLoaded = true;
+      }
       posts.items.forEach((item: Post) => {
         this.posts.items.push(item);
         // TODO: this.posts is not a Posts, just a simple data object got from the server
 //        this.posts.add(item);
       });
+      this.isLoadingNextPage = false;
     });
   }
 }

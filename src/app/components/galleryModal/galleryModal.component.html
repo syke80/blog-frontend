@@ -1,6 +1,8 @@
 <section *ngIf="isOpen" class="gallery-modal" (click)="onClickOverlay()">
-  <button class="gallery-modal__previous" (click)="onClickPrevious($event)">Previous</button>
-  <img [src]=getImageUrl() class="gallery-modal__image">
-  <button class="gallery-modal__next" (click)="onClickNext($event)">Next</button>
+  <div class="gallery-modal__loading" *ngIf="!isImageLoaded">Loading</div>
+
+  <button class="gallery-modal__previous" (click)="onClickPrevious($event)" *ngIf="isImageLoaded">Previous</button>
+  <img [src]="getImageUrl()" (load)="onImageLoad()" class="gallery-modal__image">
+  <button class="gallery-modal__next" (click)="onClickNext($event)" *ngIf="isImageLoaded">Next</button>
   <button class="gallery-modal__close" (click)="onClickClose($event)">Close</button>
 </section>

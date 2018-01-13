@@ -1,13 +1,13 @@
 .posts {
   width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
 .post {
   display: block;
-  border-bottom: 1px solid #dddddd;
-  width: 320px;
-  padding: 10px;
+  border-top: 1px solid #aaaaaa;
   box-sizing: content-box;
+  min-height: 500px;
 }
 
 .post__date {
@@ -23,16 +23,18 @@
 
 .post__photo {
   display: block;
+  border: 1px solid #aaaaaa;
+  box-sizing: border-box;
 }
 
 .post__photo--main {
-  width: 320px;
-  margin-right: 10px;
+  width: 100%;
 }
 
 .post__photo--thumbnail {
-  width: 100px;
-  margin-right: 10px;
+  width: 32%;
+  margin-right: 2%;
+  margin-top: 10px;
 }
 
 .post__photo:first-child {
@@ -44,6 +46,35 @@
 }
 
 .post__photo__image {
+  display: block;
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .post {
+    width: 500px;
+  }
+  .post__photo--thumbnail {
+    width: 160px;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 992px) {
+  .post {
+    display: flex;
+    min-width: 900px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post__text-container {
+    flex-grow: 1;
+  }
+
+  .post__photos {
+    width: 500px;
+  }
+
+}

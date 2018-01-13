@@ -5,17 +5,12 @@ import { EditPostsPageComponent } from './components/editPostsPage/editPostsPage
 import { ViewPostsPageComponent } from './components/viewPostsPage/viewPostsPage.component';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: '/editposts',
-        pathMatch: 'full'
-    },
   {
     path: 'editposts',
     component: EditPostsPageComponent
   },
   {
-    path: 'viewposts',
+    path: '',
     component: ViewPostsPageComponent
   }
 ];

@@ -4,10 +4,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center; /* align horizontal */
   align-items: center; /* align vertical */
+}
+
+.gallery-modal__loading {
+  position: fixed;
+  background: url(/assets/loader.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 90%;
+  height: 90%;
+  background-position: center center;
+  text-indent: -10000px;
 }
 
 .gallery-modal__image {
@@ -19,4 +30,16 @@
   position: absolute;
   top: 5%;
   right: 5%;
+}
+
+.gallery-modal__next {
+  position: fixed;
+  top: 50%;
+  right: 0;
+}
+
+.gallery-modal__previous {
+  position: fixed;
+  top: 50%;
+  left: 0;
 }

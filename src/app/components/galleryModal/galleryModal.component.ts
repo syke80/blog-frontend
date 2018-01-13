@@ -9,6 +9,7 @@ import { GalleryService } from '../../services/gallery.service';
 })
 export class GalleryModalComponent implements OnInit {
   isOpen = false;
+  isImageLoaded = false;
 
   constructor(
     private galleryService: GalleryService
@@ -18,8 +19,13 @@ export class GalleryModalComponent implements OnInit {
     return this.galleryService.getImageUrl();
   }
 
-  onClickOverlay() {
+  close() {
+    this.isImageLoaded = false;
     this.galleryService.close();
+  }
+
+  onClickOverlay() {
+    this.close();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -31,17 +37,23 @@ export class GalleryModalComponent implements OnInit {
 
   onClickClose(event) {
     event.stopPropagation();
-    this.galleryService.close();
+    this.close();
   }
 
   onClickPrevious(event) {
     event.stopPropagation();
+    this.isImageLoaded = false;
     this.galleryService.setPrevious();
   }
 
   onClickNext(event) {
     event.stopPropagation();
+    this.isImageLoaded = false;
     this.galleryService.setNext();
+  }
+
+  onImageLoad() {
+    this.isImageLoaded = true;
   }
 
   ngOnInit() {

@@ -21,6 +21,7 @@ import {GalleryService} from './services/gallery.service';
 
 import { DraggableDirective } from './directives/draggable.directive';
 import { DropTargetDirective } from './directives/dropTarget.directive';
+import { InViewportDirective } from './directives/inViewport.directive';
 import { GalleryDirective } from './directives/gallery.directive';
 import { DragService } from './services/drag.service';
 
@@ -44,6 +45,7 @@ import { DragService } from './services/drag.service';
     DraggableDirective,
     DropTargetDirective,
     GalleryDirective,
+    InViewportDirective,
     NavigationComponent
   ],
   providers: [
