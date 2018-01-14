@@ -30,16 +30,52 @@
   position: absolute;
   top: 5%;
   right: 5%;
+  border: 0;
+  background: #ffffff;
+}
+
+.gallery-modal__close span {
+  display: none;
+}
+
+.gallery-modal__close:after {
+  content: "x";
 }
 
 .gallery-modal__next {
   position: fixed;
   top: 50%;
-  right: 0;
+  right: 1%;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  background: #ffffff;
+  transform: translateY(-50%);
+}
+
+.gallery-modal__next span {
+  display: none;
+}
+
+.gallery-modal__next:after {
+  content: "\003E";
 }
 
 .gallery-modal__previous {
   position: fixed;
   top: 50%;
-  left: 0;
+  left: 1%;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  background: #ffffff;
+  transform: translateY(-50%);
+}
+
+.gallery-modal__previous span {
+  display: none;
+}
+
+.gallery-modal__previous:after {
+  content: "\003C";
 }

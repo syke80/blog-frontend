@@ -46,6 +46,15 @@ export class EditPostsComponent implements OnInit {
       });
   }
 
+  updatePost(post) {
+    console.log("will be updated", post);
+    let tagIds = post.tags.map(item => item._id);
+    this.postsService.updateTags(post._id, post.tags)
+      .subscribe( () => {
+        console.log('title updated');
+      });
+  }
+
   selectPost(post: Post): void {
     this.selectedPost = post;
   }
@@ -85,6 +94,40 @@ export class EditPostsComponent implements OnInit {
       .subscribe(() => {
         this.getPosts();
       })
+  }
+
+  // TODO: should be in post model - should use post model
+  private isPostContainsTag(post, tag) {
+    for (let i in post.tags) {
+      if (post.tags[i].name === tag.name) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private removeTagFromPost(post, tag) {
+    for (let i in post.tags) {
+      if (post.tags[i].name === tag.name) {
+        post.tags.splice(i, 1);
+        return;
+      }
+    }
+  }
+
+  onAddTagClicked(post, tag) {
+    if (!this.isPostContainsTag(post, tag)) {
+      post.tags.push(tag);
+      this.updatePost(post);
+    }
+  }
+
+  onRemoveTagClicked(post, tag) {
+    if (this.isPostContainsTag(post, tag)) {
+      this.removeTagFromPost(post, tag);
+      this.updatePost(post);
+    }
   }
 
   loadNextPage() {

@@ -5,9 +5,9 @@
 
 .post {
   display: block;
-  border-top: 1px solid #aaaaaa;
   box-sizing: content-box;
   min-height: 500px;
+  border-top: 1px solid #aaaaaa;
 }
 
 .post__date {
@@ -23,8 +23,8 @@
 
 .post__photo {
   display: block;
-  border: 1px solid #aaaaaa;
   box-sizing: border-box;
+  box-shadow: 3px 3px 3px #dddddd;
 }
 
 .post__photo--main {

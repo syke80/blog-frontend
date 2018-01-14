@@ -9,6 +9,17 @@
       {{formatDate(post.date)}}
     </div>
 
+    <div class="post__tags">
+      <ul>
+        <li *ngFor="let tag of post.tags">
+          {{tag.name}}
+          <button (click)="onRemoveTagClicked(post, tag)">Del</button>
+        </li>
+      </ul>
+    </div>
+
+    <es-add-tag (addTag)="onAddTagClicked(post, $event)"></es-add-tag>
+
     <div class="post__title">
       <input [(ngModel)]="post.title">
       <button type="button" (click)="updateTitle(post._id, post.title)">Save</button>
@@ -23,12 +34,6 @@
         </section>
       </span>
     </span>
-
-    <div class="post__tags">
-      {{post.tags}}
-    </div>
-
-    <es-add-tag [post]="post"></es-add-tag>
 
   </article>
 </section>

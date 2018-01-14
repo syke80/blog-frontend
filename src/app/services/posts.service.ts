@@ -91,10 +91,27 @@ export class PostsService {
     urlSearchParams.append('title', title);
 
     return this.http.put(
-        this.getServiceEndpoint() + id,
-        urlSearchParams,
-        options
-      )
+      this.getServiceEndpoint() + id,
+      urlSearchParams,
+      options
+    )
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+
+  updateTags(id, tags): Observable<any> {
+    let options = new RequestOptions({
+      headers: this.getHeaders()
+    });
+
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('tags', JSON.stringify(tags));
+
+    return this.http.put(
+      this.getServiceEndpoint() + id,
+      urlSearchParams,
+      options
+    )
       .map(response => response.json())
       .catch(this.handleError);
   }
@@ -123,23 +140,6 @@ export class PostsService {
         return new Posts(postItems, navigation);
         */
       })
-      .catch(this.handleError);
-  }
-
-  saveTag(postId, tag) {
-    let options = new RequestOptions({
-      headers: this.getHeaders()
-    });
-
-    let urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('tag', tag);
-
-    return this.http.put(
-        this.getServiceEndpoint() + postId + '/tag',
-        urlSearchParams,
-        options
-      )
-      .map(response => response.json())
       .catch(this.handleError);
   }
 

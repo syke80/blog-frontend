@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Post} from '../../models/post.model';
-import {PostsService} from '../../services/posts.service';
+import {Component, Output, EventEmitter} from '@angular/core';
+import {TagService} from '../../services/tag.service';
 
 @Component({
   moduleId: module.id,
@@ -10,19 +9,31 @@ import {PostsService} from '../../services/posts.service';
 })
 
 export class AddTagComponent {
-  @Input()
-  post: Post;
-  tag: string;
+  @Output('addTag') addTag:EventEmitter<Object>;
+  tagName: string;
 
   constructor(
-    private postsService: PostsService,
+    private tagService: TagService
   ) {
+    this.addTag = new EventEmitter();
   }
 
-  saveTag() {
-    this.postsService.saveTag(this.post._id, this.tag)
-    .subscribe( () => {
-      console.log('Tag saved');
-    });
+  onAddTagClick() {
+    // el kell dobnia egy eventet a tagName-gel
+    //   - elkeri a servicetol
+    //   - ha nincs ilyen, akkor letrehooza
+
+    let tag = this.tagService.getTag(this.tagName);
+
+    if (tag) {
+      this.addTag.emit(tag);
+    }
+    else {
+      this.tagService.addTag(this.tagName)
+        .subscribe( createdTag => {
+          this.addTag.emit(createdTag);
+          this.tagService.getTags();
+        });
+    }
   }
 }
