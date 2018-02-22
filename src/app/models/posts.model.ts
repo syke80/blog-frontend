@@ -5,9 +5,9 @@ export class Posts {
   items: Array<Post>;
   pagination: Pagination;
 
-  constructor(items, pagination) {
-    this.items = items;
-    this.pagination = pagination;
+  constructor(items?, pagination?) {
+    this.items = items || [];
+    this.pagination = pagination || new Pagination();
   }
 
   add(item: Post) {

@@ -10,6 +10,7 @@ import {Pagination} from '../../models/pagination.model';
 export class NavigationComponent {
   @Input()
   url: string = '';
+
   @Input()
-  navigation: Pagination;
+  pagination: Pagination;
 }

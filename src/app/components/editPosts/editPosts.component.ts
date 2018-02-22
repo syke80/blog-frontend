@@ -17,8 +17,8 @@ import * as moment from 'moment';
 })
 
 export class EditPostsComponent implements OnInit {
-  navigation: Pagination = new Pagination(1, 10, 0);
-  posts: Posts;
+  pagination: Pagination = new Pagination();
+  posts: Posts = new Posts();
   selectedPost: Post;
   photosUrl: string;
 
@@ -69,14 +69,23 @@ export class EditPostsComponent implements OnInit {
   moveOutPhoto(photo) {
     this.moveOutPhotoService.moveOutPhoto(photo)
       .subscribe(() => {
-        this.getPosts();
+//        this.getPosts();
+        this.reloadPosts();
       })
   }
 
   getPosts(): void {
-    this.postsService.getPosts(this.navigation)
+    this.postsService.getPosts(this.pagination)
       .subscribe((posts: Posts) => {
         this.posts = posts;
+      })
+  }
+
+  reloadPosts(): void {
+    let fullPagePagination = new Pagination(1, this.pagination.limit * this.pagination.page, this.pagination.count);
+    this.postsService.getPosts(fullPagePagination)
+      .subscribe((posts: Posts) => {
+        this.posts.items = posts.items;
       })
   }
 
@@ -92,7 +101,8 @@ export class EditPostsComponent implements OnInit {
     console.log('dropped', data, post);
     this.movePhotoService.movePhotoToPost(data, post)
       .subscribe(() => {
-        this.getPosts();
+//        this.getPosts();
+        this.reloadPosts();
       })
   }
 
@@ -130,9 +140,18 @@ export class EditPostsComponent implements OnInit {
     }
   }
 
+  onUpdateVisibility(post, isVisible) {
+    let lastPost = this.posts.items[this.posts.items.length - 1];
+
+    if (isVisible && post === lastPost) {
+      console.log("visible last", post.date);
+      this.loadNextPage();
+    }
+  }
+
   loadNextPage() {
-    this.navigation.page += 1;
-    this.postsService.getPosts(this.navigation)
+    this.pagination.page += 1;
+    this.postsService.getPosts(this.pagination)
     .subscribe((posts: Posts) => {
       posts.items.forEach((item: Post) => {
         this.posts.items.push(item);

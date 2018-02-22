@@ -2,6 +2,8 @@
   <article
     class="list-group-item post"
     [ngClass]="{active: selectedPost && post == selectedPost}"
+    in-viewport
+    (inViewport)="onUpdateVisibility(post, $event.value)"
     myDropTarget (myDrop)="onDrop($event, post)"
     *ngFor="let post of posts.items">
 
@@ -22,7 +24,7 @@
 
     <div class="post__title">
       <input [(ngModel)]="post.title">
-      <button type="button" (click)="updateTitle(post._id, post.title)">Save</button>
+      <button type="button" (click)="updateTitle(post._id, post.title)">Save Title</button>
     </div>
 
     <span class="photos">
@@ -37,5 +39,3 @@
 
   </article>
 </section>
-
-<button (click)="loadNextPage()">Load more</button>

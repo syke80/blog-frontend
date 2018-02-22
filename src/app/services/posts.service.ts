@@ -135,9 +135,9 @@ export class PostsService {
 /*
         let postsResponse: PostsResponse = response.json();
         let postItems: Array<Post> = this.convertPostItems(postsResponse.data);
-        let navigation: NavigationModel = this.convertNavigation(postsResponse.navigation);
+        let pagination: NavigationModel = this.convertNavigation(postsResponse.pagination);
 
-        return new Posts(postItems, navigation);
+        return new Posts(postItems, pagination);
         */
       })
       .catch(this.handleError);
