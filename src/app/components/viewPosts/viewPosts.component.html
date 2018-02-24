@@ -7,17 +7,13 @@
     (inViewport)="onUpdateVisibility(post, $event.value)"
     *ngFor="let post of posts.items">
 
-    <div class="post__text-container">
+    <div class="post__text-container post__text-container--before">
       <div class="post__date">
         {{formatDate(post.date)}}
       </div>
 
       <div *ngIf="post.title" class="post__title">
         {{post.title}}
-      </div>
-
-      <div class="post__tags">
-        {{post.tags}}
       </div>
     </div>
 
@@ -36,5 +32,14 @@
       </a>
     </div>
 
+    <div class="post__text-container post__text-container--after">
+      <div class="post__date">
+        {{formatDate(post.date)}}
+      </div>
+
+      <div *ngIf="post.title" class="post__title">
+        {{post.title}}
+      </div>
+    </div>
   </article>
 </section>

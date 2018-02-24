@@ -50,6 +50,11 @@
   width: 100%;
 }
 
+.post__text-container--after {
+  display: none;
+  padding-left: 20px;
+}
+
 @media (min-width: 768px) {
   .post {
     width: 500px;
@@ -64,13 +69,22 @@
 @media (min-width: 992px) {
   .post {
     display: flex;
-    min-width: 900px;
+    width: 800px;
     padding-top: 10px;
     margin-bottom: 10px;
+    margin-left: 300px;
   }
 
   .post__text-container {
     flex-grow: 1;
+  }
+
+  .post__text-container--before {
+    display: none;
+  }
+
+  .post__text-container--after {
+    display: block;
   }
 
   .post__photos {
